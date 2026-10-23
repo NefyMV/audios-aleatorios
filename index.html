@@ -85,21 +85,21 @@
 <body>
   <main class="tarjeta">
     <div class="icono">🎧</div>
-    <h1>¡Un mensaje para ti!</h1>
-    <p>Descubre el mensaje que te ha tocado.</p>
+    <h1>¡Spelling Bee 3ro!</h1>
+    <p>Escucha la palabra y deletrea.</p>
 
     <audio id="reproductor" controls preload="auto"></audio>
 
     <button id="escuchar" type="button">
-      ▶ Escuchar audio
+      ▶ Escuchar palabra
     </button>
 
     <button id="otro" type="button">
-      🔀 Escuchar otro mensaje
+      🔀 Escuchar otra palabra
     </button>
 
     <p id="estado" aria-live="polite">
-      Preparando tu mensaje...
+      Preparando tu nueva palabra...
     </p>
   </main>
 
@@ -126,24 +126,24 @@
       reproductor.src = "./audios/" + nombre;
       reproductor.load();
 
-      estado.textContent = "Tu mensaje está listo. ¡Que lo disfrutes!";
+      estado.textContent = "Nueva palabra. ¡Pon atención!";
 
       // Intentar reproducir automáticamente.
       const intento = reproductor.play();
 
       if (intento !== undefined) {
         intento.then(() => {
-          estado.textContent = "Reproduciendo tu mensaje...";
+          estado.textContent = "Reproduciendo tu palabra...";
         }).catch(() => {
           estado.textContent =
-            "Toca «Escuchar audio» para reproducir tu mensaje.";
+            "Toca «Otra palabra aleatoria» para reproducir tu mensaje.";
         });
       }
     }
 
     botonEscuchar.addEventListener("click", () => {
       reproductor.play().then(() => {
-        estado.textContent = "Reproduciendo tu mensaje...";
+        estado.textContent = "Reproduciendo tu palabra...";
       }).catch(() => {
         estado.textContent =
           "No se pudo reproducir. Revisa tu conexión e inténtalo otra vez.";
@@ -154,7 +154,7 @@
 
     reproductor.addEventListener("ended", () => {
       estado.textContent =
-        "¡Mensaje terminado! Puedes escuchar otro si lo deseas.";
+        "¡Palabra lista! Puedes escuchar otra si lo deseas.";
     });
 
     reproductor.addEventListener("error", () => {
